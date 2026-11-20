@@ -109,7 +109,10 @@ function kfInit() {
     var io = new IntersectionObserver(function (es) {
       if (!es.some(function (e) { return e.isIntersecting; })) return;
       io.disconnect();
-      import("./unit3d.js").then(function (m) { m.start(holder, function () { return unit.p; }, { phone: phone }); }).catch(function () {});
+      // the thermostat's state = the text block the engine is showing most strongly right now (no lag)
+      var steps = Array.prototype.slice.call(unit.el.querySelectorAll(".u-step"));
+      var getStep = function () { var best = 0, bo = -1; for (var s = 0; s < steps.length; s++) { var o = parseFloat(steps[s].style.opacity); if (isNaN(o)) o = 0; if (o > bo) { bo = o; best = s; } } return best; };
+      import("./unit3d.js").then(function (m) { m.start(holder, function () { return unit.p; }, { phone: phone, getStep: getStep }); }).catch(function () {});
     }, { rootMargin: "120% 0px" });
     io.observe(holder);
   }

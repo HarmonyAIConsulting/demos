@@ -1,6 +1,6 @@
 // Stylised 3D smart thermostat, built in code with three.js (no photos, no people). Loaded only when its scene is near.
-// start(holder, getProgress, {phone}): turns clearly with scroll; its screen counts 95 -> 72 and its ring goes
-// sunset orange -> Kool Freeze ice blue, tying into the page's cool-down.
+// start(holder, getProgress, {phone, getStep}): turns clearly with scroll; its screen shows COOLING / HEATING / CLEAN AIR,
+// switching on the same frame as the text beside it (getStep = the text block currently most visible).
 import * as THREE from "./vendor/three.module.min.js";
 
 function makeScreen() {
@@ -92,10 +92,12 @@ export function start(holder, getP, opts = {}) {
     rx += ((0.25 - p * 0.35) - rx) * 0.12;
     t.rotation.set(rx, ry, 0);
     t.position.y = Math.sin(now / 1400) * 0.06;
-    // states switch with the text cues beside the thermostat (cooling 0-0.37, heating 0.37-0.67, indoor air after)
+    // the screen state follows the text beside it with no lag: opts.getStep() names whichever text block is most
+    // visible right now (same frame the engine fades the words). Only the turn above is eased. Raw progress drives the numbers.
+    const step = opts.getStep ? opts.getStep() : (target < 0.37 ? 0 : target < 0.67 ? 1 : 2);
     let mode, temp, fill;
-    if (p < 0.37) { const k = p / 0.37; mode = "cool"; temp = Math.round(76 - 4 * Math.min(1, k * 1.3)); fill = 0.35 + 0.65 * k; }
-    else if (p < 0.67) { const k = (p - 0.37) / 0.3; mode = "heat"; temp = Math.round(64 + 6 * Math.min(1, k * 1.3)); fill = 0.35 + 0.65 * k; }
+    if (step === 0) { const k = Math.min(1, target / 0.37); mode = "cool"; temp = Math.round(76 - 4 * Math.min(1, k * 1.3)); fill = 0.35 + 0.65 * k; }
+    else if (step === 1) { const k = Math.min(1, Math.max(0, (target - 0.37) / 0.3)); mode = "heat"; temp = Math.round(64 + 6 * Math.min(1, k * 1.3)); fill = 0.35 + 0.65 * k; }
     else { mode = "air"; temp = 72; fill = 1; }
     screen.draw(mode, temp, fill);
     accent.material.color.setHex(mode === "heat" ? 0xF28C28 : mode === "air" ? 0x40C8BE : 0x18A0D0);

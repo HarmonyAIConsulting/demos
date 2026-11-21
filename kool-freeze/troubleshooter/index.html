@@ -91,7 +91,6 @@ p{margin:0 0 1em}
 .trustbar span::before{content:"✓ ";color:#7FE3FF}
 .nw{white-space:nowrap}
 @media(max-width:999px){.hdr .callbig{display:none}.alert{display:none}.review{flex-basis:88%}.dial{width:min(56vw,220px)}}
-@media(max-width:640px){.reviews{flex-direction:column;overflow:visible}.review{flex-basis:auto}}
 /* sections */
 section{padding:72px 0}
 .band{background:var(--frost)}
@@ -129,6 +128,9 @@ a.card:focus-visible,.btn:focus-visible,.chip:focus-visible,a:focus-visible{outl
 .review q{display:block;quotes:none;font-size:17px;margin:8px 0 12px}
 .review .who{font-family:var(--head);font-weight:800;color:var(--navy);font-size:15px}
 .src{font-size:13px;color:var(--muted)}
+/* reviews: grid on desktop (no cut-off card or scrollbar), swipe strip on phone */
+@media(min-width:641px){.reviews{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));overflow:visible;scroll-snap-type:none}.review{flex:none}}
+@media(max-width:640px){.reviews{max-width:100%;min-width:0}.review{flex:0 0 min(82vw,340px)}}
 
 /* towns */
 .chips{display:flex;flex-wrap:wrap;gap:10px}
@@ -142,7 +144,7 @@ a.card:focus-visible,.btn:focus-visible,.chip:focus-visible,a:focus-visible{outl
 .phero p{max-width:52ch;font-size:1.1rem;opacity:.95}
 .phero .wave{position:absolute;left:0;right:0;bottom:-1px;height:40px}
 .crumbs{font-size:14px;margin-bottom:14px;opacity:.85}.crumbs a{color:#fff}
-.prose{max-width:760px}
+.prose{max-width:760px;min-width:0}
 .prose ul{padding-left:1.2em}.prose li{margin:.35em 0}
 .two{display:grid;gap:34px}
 @media(min-width:900px){.two{grid-template-columns:1.6fr 1fr}}
@@ -264,7 +266,7 @@ footer ul{list-style:none;padding:0;margin:0}footer li{margin:.35em 0}
         <li><a href="../contact/">Contact</a></li><li><a href="../privacy-policy/">Privacy Policy</a></li>
         <li><a href="../accessibility/">Accessibility</a></li></ul></div>
     </div>
-    <div class="fine">© Kool Freeze Heating &amp; Cooling · Demo rebuild prepared by Harmony AI Automation Media &amp; Branding. Reviews shown are quoted from Kool Freeze's own site. Truck photo from koolfreezellc.com. Coastal scenery, frost and the 3D thermostat are drawn illustrations (no AI images, no stock people).</div>
+    <div class="fine">© Kool Freeze Heating &amp; Cooling · Demo rebuild prepared by Harmony AI. Reviews shown are quoted from Kool Freeze's own site. Truck photo from koolfreezellc.com. Coastal scenery, frost and the 3D thermostat are drawn illustrations (no AI images, no stock people).</div>
   </div>
 </footer>
 <nav class="actionbar" aria-label="Quick actions">

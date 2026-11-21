@@ -62,8 +62,8 @@ function kfInit() {
   var last = {}, lastT = -1, lastD = -1, lastLine = -1, t0 = performance.now();
   function frame(now) {
     var p = world ? world.p : 0;
-    var h = 1 - sstep(0.16, 0.28, p);          // hero copy
-    var k = sstep(0.24, 0.36, p);              // cool-down card
+    var h = 1 - sstep(0.2, 0.27, p);           // hero copy (overlaps the card slightly: never an empty screen)
+    var k = sstep(0.19, 0.26, p);              // cool-down card
     var c = Math.min(1, Math.max(0, (p - 0.3) / 0.6));   // cooling progress
     var heat = 1 - c;
     if (stage && (last.p === undefined || Math.abs(last.p - p) > 0.0005)) {

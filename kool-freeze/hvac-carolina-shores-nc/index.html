@@ -130,7 +130,7 @@ a.card:focus-visible,.btn:focus-visible,.chip:focus-visible,a:focus-visible{outl
 .src{font-size:13px;color:var(--muted)}
 /* reviews: grid on desktop (no cut-off card or scrollbar), swipe strip on phone */
 @media(min-width:641px){.reviews{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));overflow:visible;scroll-snap-type:none}.review{flex:none}}
-@media(max-width:640px){.reviews{max-width:100%;min-width:0}.review{flex:0 0 min(82vw,340px)}}
+@media(max-width:640px){.reviews{max-width:100%;min-width:0;align-items:flex-start}.review{flex:0 0 min(82vw,340px)}}
 
 /* towns */
 .chips{display:flex;flex-wrap:wrap;gap:10px}

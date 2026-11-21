@@ -73,23 +73,18 @@
   if (!fab || !chat) return;
   var log = chat.querySelector(".log"), quick = chat.querySelector(".quick");
   var PHONE = fab.getAttribute("data-phone"), TEL = fab.getAttribute("data-tel"), ROOT = fab.getAttribute("data-root") || "";
+  // Three tap questions (Harmony 2026-11-21). No promised times or prices; town facts only from Kool Freeze's own service-area list.
   var flows = {
-    "My AC stopped working": [
-      "Oh no, let's get you cool again. Is the outdoor unit running at all, or is it completely silent?",
-      "Got it. Two quick checks while I alert the team: is the thermostat set to COOL, and has the breaker tripped?",
-      "In the live version I'd now text your details to Kool Freeze's on-call tech and offer you the first open slot. Fastest right now: call <a href='tel:" + TEL + "'>" + PHONE + "</a>."
+    "Why is my AC freezing up?": [
+      "Ice on an AC usually points to an airflow or refrigerant problem. Set the thermostat to OFF with the fan ON so it can thaw, and check that the air filter isn't clogged.",
+      "Then have a technician take a look. Call Kool Freeze at <a href='tel:" + TEL + "'>" + PHONE + "</a>."
     ],
-    "Book a tune-up": [
-      "Happy to! Is this for heating, cooling, or both?",
-      "In the live version I'd show real open times and book it for you, then text you a reminder the day before. For now, use the <a href='" + ROOT + "book/'>booking page</a> or call <a href='tel:" + TEL + "'>" + PHONE + "</a>."
+    "Do you serve Sunset Beach?": [
+      "Yes. Sunset Beach is one of the towns Kool Freeze lists, along with Ocean Isle Beach, Holden Beach, Calabash, Carolina Shores, Ash and Shallotte in NC, and North Myrtle Beach, Little River and Longs in SC."
     ],
-    "Do you serve my town?": [
-      "Kool Freeze serves Ocean Isle Beach, Holden Beach, Calabash, Carolina Shores, Sunset Beach, Ash and Shallotte in NC, plus North Myrtle Beach, Little River and Longs in SC.",
-      "Not on the list? Call <a href='tel:" + TEL + "'>" + PHONE + "</a> and ask. They may still be able to help."
-    ],
-    "Rental property / property manager": [
-      "Kool Freeze works with property managers here on the coast. How many units do you manage?",
-      "In the live version I'd collect the unit addresses and set up a service request the team can schedule between guest stays."
+    "How soon can someone come out?": [
+      "I can't promise a time in this demo. The quickest way to get on the schedule is to call <a href='tel:" + TEL + "'>" + PHONE + "</a>.",
+      "On your real site, I'd pass your name, number and the problem straight to the office."
     ]
   };
   function say(html, who) {

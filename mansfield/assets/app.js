@@ -52,7 +52,7 @@
       e.preventDefault();
       var box = f.querySelector(".result");
       box.hidden = false;
-      box.innerHTML = "<b>Demo only, nothing was sent.</b> On the live site this request goes straight to Mansfield, and Hali texts the customer back within a minute to confirm.";
+      box.innerHTML = "<b>Demo only, nothing was sent.</b> On the live site this request goes straight to Mansfield's office.";
       box.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
     });
   });
